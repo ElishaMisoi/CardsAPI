@@ -12,7 +12,10 @@ var config = builder.Configuration;
 
 // Add services to the container.
 
+builder.Services.AddLogging();
+
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(config);
@@ -46,8 +49,6 @@ builder.Services.AddSwaggerGen(options =>
             Array.Empty<string>()
         }
     });
-
-    //options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
 builder.Services.AddAuthentication().AddJwtBearer(options =>

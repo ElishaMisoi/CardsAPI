@@ -29,8 +29,6 @@ namespace Infrastructure.Services.Authentication
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value!));
 
-            // SecurityAlgorithms.HmacSha512Signature
-
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
 
             var token = new JwtSecurityToken

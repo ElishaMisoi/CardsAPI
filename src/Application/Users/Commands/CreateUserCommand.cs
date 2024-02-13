@@ -1,6 +1,6 @@
-﻿using Application.Common;
-using Application.Common.CommandHandlers;
+﻿using Application.Common.CommandHandlers;
 using Application.Common.Interfaces;
+using Application.Common.Utils;
 using Application.Users.Commands.DTOs;
 using Application.Users.Queries.DTOs;
 using AutoMapper;

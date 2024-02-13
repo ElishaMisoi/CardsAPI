@@ -12,6 +12,7 @@ namespace Infrastructure.Persistence
         }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Card> Cards => Set<Card>();
 
         public new async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
