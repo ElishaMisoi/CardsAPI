@@ -6,8 +6,8 @@
 Assume an application named Cards that allows users to create and manage tasks in the form of cards:
 
 - Application users are identified uniquely by their mail address, have a role (Member or Admin) and use a password to authenticate themselves before accessing cards 
--- Members have access to cards they created 
--- Admins have access to all cards
+    * Members have access to cards they created 
+    * Admins have access to all cards
 
 - A user creates a card by providing a name for it and, optionally, a description and a color 
 * Name is mandatory 
