@@ -10,9 +10,9 @@ Assume an application named Cards that allows users to create and manage tasks i
     * Admins have access to all cards
 
 - A user creates a card by providing a name for it and, optionally, a description and a color 
-* Name is mandatory 
-* Color, if provided, should conform to a “6 alphanumeric characters prefixed with a #“ format 
-* Upon creation, the status of a card is To Do
+    * Name is mandatory 
+    * Color, if provided, should conform to a “6 alphanumeric characters prefixed with a #“ format 
+    * Upon creation, the status of a card is To Do
 
 - A user can search through cards they have access to 
     * Filters include name, color, status and date of creation 
