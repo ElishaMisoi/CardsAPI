@@ -1,6 +1,7 @@
 ﻿using Application.Common.Interfaces;
 using Infrastructure.Persistence;
 using Infrastructure.Services.Authentication;
+using Infrastructure.Services.CurrentUser;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,7 @@ namespace Infrastructure
             });
 
             services.AddSingleton<ITokenGenerator, TokenGenerator>();
+            services.AddSingleton<ICurrentUserService, CurrentUserService>();
 
             return services;
         }
