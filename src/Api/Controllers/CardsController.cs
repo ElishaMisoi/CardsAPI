@@ -15,9 +15,15 @@ namespace Api.Controllers
         }
 
         [HttpPut("update/{id:guid}")]
-        public async Task<ActionResult<GetCardDTO>> GetCards([FromRoute] Guid id, [FromBody] UpdateCardDTO updateCardDTO)
+        public async Task<ActionResult<GetCardDTO>> UpdateCard([FromRoute] Guid id, [FromBody] UpdateCardDTO updateCardDTO)
         {
             return await Mediator.Send(new UpdateCardCommand(id, updateCardDTO));
+        }
+
+        [HttpDelete("delete/{id:guid}")]
+        public async Task<ActionResult> DeleteCard([FromRoute] Guid id)
+        {
+            return await Mediator.Send(new DeleteCardCommand(id));
         }
     }
 }
