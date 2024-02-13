@@ -1,4 +1,6 @@
-﻿using Infrastructure.Persistence;
+﻿using Application.Common.Interfaces;
+using Infrastructure.Persistence;
+using Infrastructure.Services.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,10 +11,12 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
             {
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddSingleton<ITokenGenerator, TokenGenerator>();
 
             return services;
         }
