@@ -10,20 +10,20 @@ Assume an application named Cards that allows users to create and manage tasks i
 -- Admins have access to all cards
 
 - A user creates a card by providing a name for it and, optionally, a description and a color 
--- Name is mandatory 
--- Color, if provided, should conform to a “6 alphanumeric characters prefixed with a #“ format 
--- Upon creation, the status of a card is To Do
+* Name is mandatory 
+* Color, if provided, should conform to a “6 alphanumeric characters prefixed with a #“ format 
+* Upon creation, the status of a card is To Do
 
 - A user can search through cards they have access to 
--- Filters include name, color, status and date of creation 
--- Optionally limit results using page & size or offset & limit options 
--- Results may be sorted by name, color, status, date of creation
+    * Filters include name, color, status and date of creation 
+    * Optionally limit results using page & size or offset & limit options 
+    * Results may be sorted by name, color, status, date of creation
 
 - A user can request a single card they have access to
 
 - A user can update the name, the description, the color and/or the status of a card they have access to 
--- Contents of the description and color fields can be cleared out 
--- Available statuses are To Do, In Progress and Done
+    * Contents of the description and color fields can be cleared out 
+    * Available statuses are To Do, In Progress and Done
 
 Build a RESTful web service that satisfies the aforementioned requirements using C#, .NET and an SQL database of your choice
 
