@@ -1,4 +1,5 @@
 ﻿using Api.Common;
+using Application.Common.Models;
 using Application.Users.Commands;
 using Application.Users.Commands.DTOs;
 using Application.Users.Queries;
@@ -24,10 +25,10 @@ namespace Api.Controllers
             return await Mediator.Send(new LoginUserCommand(loginUserDTO));
         }
 
-        [HttpGet("listUsers"), Authorize(Roles = AuthRoles.Admin)]
-        public async Task<ActionResult<IEnumerable<GetUserDTO>>> ListUsers()
+        [HttpGet("list"), Authorize(Roles = AuthRoles.Admin)]
+        public async Task<ActionResult<PaginatedApiResult<GetUserDTO>>> ListUsers([FromQuery] PaginationQuery paginationQuery)
         {
-            return await Mediator.Send(new ListUsersQuery());
+            return await Mediator.Send(new ListUsersQuery(paginationQuery.PageIndex, paginationQuery.PageSize));
         }
     }
 }

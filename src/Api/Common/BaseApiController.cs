@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Common
 {
-    [Authorize]
+    [Authorize(Roles = $"{AuthRoles.Admin}, {AuthRoles.Member}")]
     [ApiController]
     [Route("api/[controller]")]
     public abstract class BaseApiController : ControllerBase
