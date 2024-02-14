@@ -59,7 +59,7 @@ namespace Application.Cards.Commands
             }
             else
             {
-                return new UnauthorizedObjectResult("");
+                return new UnauthorizedObjectResult("User not authorized to perform this action");
             }
         }
     }
