@@ -25,6 +25,13 @@ namespace Application.Users.Commands
 
         public async Task<ActionResult<GetUserDTO>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
+            var isValidEmail = EmailValidator.IsValidEmail(request.CreateUserDTO.Email);
+
+            if (!isValidEmail)
+            {
+                return new BadRequestObjectResult("Invalid Email");
+            }
+
             var existingUser = await _dbContext.Users.FirstOrDefaultAsync(s => s.Email.ToLower() == request.CreateUserDTO.Email.ToLower());
 
             if (existingUser != null)
@@ -47,7 +54,7 @@ namespace Application.Users.Commands
                 LastName = request.CreateUserDTO.LastName,
                 Email = request.CreateUserDTO.Email,
                 PasswordHash = passwordHash,
-                Role = request.CreateUserDTO.RoleId
+                Role = request.CreateUserDTO.Role
             };
 
             _dbContext.Users.Add(newUser);

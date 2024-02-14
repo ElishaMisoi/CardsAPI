@@ -3,8 +3,11 @@ using Application;
 using Infrastructure;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Reflection;
 using System.Text;
+using System.Text.Json.Serialization;
+using System.Xml.XPath;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +25,15 @@ builder.Services.AddInfrastructure(config);
 
 builder.Services.AddSwaggerGen(options =>
 {
+    var filePath = Path.Combine(AppContext.BaseDirectory, "Api.xml");
+    options.IncludeXmlComments(filePath);
+
+    if (File.Exists(filePath))
+    {
+        var comments = new XPathDocument(filePath);
+        options.OperationFilter<XmlCommentsOperationFilter>(comments);
+    }
+
     options.ParameterFilter<GuidParameterFilter>();
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "Cards API", Version = "v1" });
 
@@ -62,7 +74,11 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
     };
 });
 
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options => { options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 

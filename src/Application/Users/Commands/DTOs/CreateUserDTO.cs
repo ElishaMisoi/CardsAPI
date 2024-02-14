@@ -8,6 +8,6 @@ namespace Application.Users.Commands.DTOs
         public required string LastName { get; set; }
         public required string Email { get; set; }
         public required string Password { get; set; }
-        public required UserRole RoleId { get; set; }
+        public required UserRole Role { get; set; }
     }
 }

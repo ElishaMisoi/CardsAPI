@@ -3,6 +3,7 @@ using Application.Cards.Queries.DTOs;
 using Application.Common.CommandHandlers;
 using Application.Common.Interfaces;
 using AutoMapper;
+using Domain.Common.Enums;
 using Domain.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -42,8 +43,9 @@ namespace Application.Cards.Commands
             }
 
             var currentUserId = _currentUserService.GetCurrentUserId();
+            var currentUserRole = _currentUserService.GetCurrentUserRole();
 
-            if ((new Guid(currentUserId)) != existingCard!.UserId)
+            if (currentUserRole == UserRole.Member.ToString() && (new Guid(currentUserId)) != existingCard!.UserId)
             {
                 return new UnauthorizedObjectResult($"User is not authorized to perform this action");
             }
@@ -51,7 +53,7 @@ namespace Application.Cards.Commands
             existingCard.Name = request.UpdateCardDTO.Name ?? existingCard.Name;
             existingCard.Description = request.UpdateCardDTO.Description ?? existingCard.Description;
             existingCard.Color = request.UpdateCardDTO.Color ?? existingCard.Color;
-            existingCard.Status = request.UpdateCardDTO.StatusId ?? existingCard.Status;
+            existingCard.Status = request.UpdateCardDTO.Status ?? existingCard.Status;
 
             _dbContext.Cards.Update(existingCard);
             await _dbContext.SaveChangesAsync(cancellationToken);
