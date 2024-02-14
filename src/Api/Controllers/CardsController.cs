@@ -4,7 +4,6 @@ using Application.Cards.Commands.DTOs;
 using Application.Cards.Queries;
 using Application.Cards.Queries.DTOs;
 using Application.Common.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
@@ -111,7 +110,7 @@ namespace Api.Controllers
         /// Date
         /// </param>
         /// <returns></returns>
-        [HttpGet("list"), Authorize(Roles = AuthRoles.Admin)]
+        [HttpGet("list")]
         public async Task<ActionResult<PaginatedApiResult<GetCardDTO>>> ListCards([FromQuery] SearchCardDTO searchCardDTO)
         {
             return await Mediator.Send(new ListCardsQuery(searchCardDTO));
