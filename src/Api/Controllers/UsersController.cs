@@ -34,7 +34,8 @@ namespace Api.Controllers
         /// Admin
         /// </param>
         /// <returns></returns>
-        [HttpPost("register"), Authorize(Roles = AuthRoles.Admin)]
+        [AllowAnonymous]
+        [HttpPost("register")]
         public async Task<ActionResult<GetUserDTO>> CreateUser([FromBody] CreateUserDTO createUserDTO)
         {
             return await Mediator.Send(new CreateUserCommand(createUserDTO));

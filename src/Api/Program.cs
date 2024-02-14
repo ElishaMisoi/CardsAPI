@@ -99,5 +99,7 @@ app.MapControllers();
 
 app.Run();
 
-
+/// <summary>
+/// DO NOT REMOVE
+/// </summary>
 public partial class Program { }
