@@ -11,6 +11,7 @@ namespace Application.Users.Queries.DTOs
         public string LastName { get; set; } = default!;
         public string Email { get; set; } = default!;
         public string Role { get; set; } = default!;
+        public DateTime CreatedAt { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -1,29 +1,35 @@
-﻿using Application.Common.CommandHandlers;
+﻿using Application.Cards.Queries.DTOs;
+using Application.Common.CommandHandlers;
 using Application.Common.Interfaces;
+using AutoMapper;
 using Domain.Common.Enums;
+using Domain.Data.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Cards.Commands
+namespace Application.Cards.Queries
 {
-    public sealed record DeleteCardCommand(Guid Id) : IApiRequest;
+    public sealed record GetCardByIdCommand(Guid Id) : IApiRequest<GetCardDTO>;
 
-    public sealed class DeleteCardCommandHandler : IApiRequestHandler<DeleteCardCommand>
+    public sealed class GetCardByIdCommandHandler : IApiRequestHandler<GetCardByIdCommand, GetCardDTO>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
 
-        public DeleteCardCommandHandler
+        public GetCardByIdCommandHandler
             (
             ICurrentUserService currentUserService,
-            IApplicationDbContext dbContext
+            IApplicationDbContext dbContext,
+            IMapper mapper
             )
         {
             _currentUserService = currentUserService;
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
-        public async Task<ActionResult> Handle(DeleteCardCommand request, CancellationToken cancellationToken)
+        public async Task<ActionResult<GetCardDTO>> Handle(GetCardByIdCommand request, CancellationToken cancellationToken)
         {
             var existingCard = await _dbContext
                 .Cards
@@ -43,10 +49,9 @@ namespace Application.Cards.Commands
                 return new UnauthorizedObjectResult($"User is not authorized to perform this action");
             }
 
-            _dbContext.Cards.Remove(existingCard);
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            var response = _mapper.Map<Card, GetCardDTO>(existingCard);
 
-            return new OkResult();
+            return new OkObjectResult(response);
         }
     }
 }

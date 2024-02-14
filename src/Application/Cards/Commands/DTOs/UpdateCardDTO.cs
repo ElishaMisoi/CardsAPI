@@ -7,6 +7,6 @@ namespace Application.Cards.Commands.DTOs
         public string? Name { get; set; }
         public string? Description { get; set; }
         public string? Color { get; set; }
-        public CardStatus? StatusId { get; set; }
+        public CardStatus? Status { get; set; }
     }
 }

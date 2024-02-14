@@ -12,6 +12,7 @@ namespace Application.Cards.Queries.DTOs
         public string? Description { get; set; }
         public string? Color { get; set; }
         public required string Status { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         public Guid UserId { get; set; }
         public virtual GetUserDTO? User { get; set; }
